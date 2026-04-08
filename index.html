@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio BTS SIO E5</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0c1b30;
+      --card: rgba(10, 22, 41, 0.78);
+      --border: rgba(115, 170, 255, 0.18);
+      --text: #ecf4ff;
+      --muted: #9eb3cf;
+      --primary: #39b8ff;
+      --primary-2: #7a5cff;
+      --success: #3dd9a1;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(57, 184, 255, 0.16), transparent 22%),
+        radial-gradient(circle at 80% 10%, rgba(122, 92, 255, 0.16), transparent 20%),
+        radial-gradient(circle at 50% 100%, rgba(61, 217, 161, 0.08), transparent 20%),
+        linear-gradient(135deg, #040b16 0%, #081524 45%, #07111f 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 30px 30px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(5, 12, 22, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 30px rgba(57, 184, 255, 0.28);
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      padding: 8px 12px;
+      border-radius: 12px;
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .hero {
+      padding: 90px 0 55px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      line-height: 1.02;
+      margin-bottom: 20px;
+      letter-spacing: -2px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #ffffff, #7cd8ff, #8f84ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      max-width: 700px;
+      font-size: 1.05rem;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 16px;
+      font-weight: 700;
+      transition: 0.25s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: white;
+      box-shadow: 0 14px 36px rgba(57, 184, 255, 0.24);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(57, 184, 255, 0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.08);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .stat-pill {
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(18, 35, 60, 0.9), rgba(9, 19, 34, 0.86));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -30% auto auto -20%;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(57,184,255,0.22), transparent 65%);
+      pointer-events: none;
+    }
+
+    .screen {
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(3, 9, 18, 0.75);
+      overflow: hidden;
+    }
+
+    .screen-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+    }
+
+    .screen-body {
+      padding: 20px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .mini-card {
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .mini-card h4 {
+      font-size: 0.98rem;
+      margin-bottom: 6px;
+    }
+
+    .mini-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    section {
+      padding: 26px 0;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      letter-spacing: -1px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(122, 92, 255, 0.35);
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(57, 184, 255, 0.12);
+      border: 1px solid rgba(57, 184, 255, 0.2);
+      color: #8fdfff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      font-size: 1.18rem;
+      margin-bottom: 10px;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .card ul {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .card ul li::before {
+      content: "▹";
+      color: var(--primary);
+      margin-right: 8px;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 14px;
+      width: 2px;
+      background: linear-gradient(var(--primary), rgba(122, 92, 255, 0.2));
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-left: 42px;
+      padding: 18px 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      border-radius: 50%;
+      left: -35px;
+      top: 22px;
+      box-shadow: 0 0 0 6px rgba(57,184,255,0.08);
+    }
+
+    .timeline-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill {
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+
+    footer {
+      padding: 34px 0 50px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .grid-3,
+      .grid-2,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero {
+        padding-top: 60px;
+      }
+
+      .hero-card,
+      .card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-badge">E5</div>
+        <div>
+          <div>Portfolio BTS SIO</div>
+          <small style="color: var(--muted); font-weight: 500;">Option SISR</small>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#profil">Profil</a>
+        <a href="#projets">Projets</a>
+        <a href="#competences">Compétences</a>
+        <a href="#parcours">Parcours</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-text">
+        <span class="tag">Portfolio professionnel • Épreuve E5</span>
+        <h1>
+          Un <span class="gradient-text">portfolio high-tech</span><br>
+          pour valoriser ton BTS SIO
+        </h1>
+        <p>
+          Présente ton parcours, tes compétences, tes projets techniques et tes réalisations
+          dans une interface moderne, immersive et professionnelle, pensée pour ton épreuve E5.
+        </p>
+        <div class="hero-actions">
+          <a href="#projets" class="btn btn-primary">Voir les projets</a>
+          <a href="#contact" class="btn btn-secondary">Me contacter</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-pill">BTS SIO • SISR</div>
+          <div class="stat-pill">Portfolio E5</div>
+          <div class="stat-pill">Design futuriste</div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="screen">
+          <div class="screen-top">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="screen-body">
+            <div class="mini-card">
+              <h4>Projet 01 • Infrastructure réseau</h4>
+              <p>VLAN, routage, redondance, supervision et sécurisation.</p>
+            </div>
+            <div class="mini-card">
+              <h4>Projet 02 • Active Directory</h4>
+              <p>Gestion du domaine, GPO, droits utilisateurs et stratégies.</p>
+            </div>
+            <div class="mini-card">
+              <h4>Projet 03 • Support & exploitation</h4>
+              <p>Incidents, déploiements, documentation et assistance utilisateurs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="profil">
+      <div class="section-title">
+        <div>
+          <span class="tag">Présentation</span>
+          <h2>À propos de moi</h2>
+        </div>
+        <p>
+          Cette zone te permet de te présenter rapidement : ton profil, ton école, ton entreprise,
+          ton option et ton objectif professionnel.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <span class="tag">Identité</span>
+          <h3>Timao Gourdais</h3>
+          <p>Étudiant en BTS SIO option SISR, orienté administration systèmes, réseaux et support informatique.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Formation</span>
+          <h3>BTS SIO - Option SISR</h3>
+          <p>Formation spécialisée dans l'administration des infrastructures, la cybersécurité, la virtualisation et le support.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Entreprise</span>
+          <h3>Alternance / Stage</h3>
+          <p>Ajoute ici le nom de ton entreprise, ton poste, tes missions principales et le contexte professionnel.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projets">
+      <div class="section-title">
+        <div>
+          <span class="tag">Réalisations</span>
+          <h2>Mes projets E5</h2>
+        </div>
+        <p>
+          Remplace les contenus ci-dessous par tes vraies activités : contexte, besoins, outils,
+          procédures, captures d'écran, résultats et compétences mobilisées.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card">
+          <span class="tag">Projet 1</span>
+          <h3>Infrastructure réseau sécurisée</h3>
+          <p>Conception et mise en place d'une architecture réseau avec segmentation, sécurisation et haute disponibilité.</p>
+          <ul>
+            <li>Configuration des VLAN</li>
+            <li>Tests de connectivité et de redondance</li>
+            <li>Documentation technique</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <span class="tag">Projet 2</span>
+          <h3>Déploiement Active Directory</h3>
+          <p>Mise en œuvre d'un domaine, structuration des OU, création de comptes et application de GPO.</p>
+          <ul>
+            <li>Gestion des utilisateurs et groupes</li>
+            <li>Politiques de sécurité</li>
+            <li>Administration centralisée</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <span class="tag">Projet 3</span>
+          <h3>Support et assistance informatique</h3>
+          <p>Résolution d'incidents, préparation de postes, suivi de tickets et accompagnement utilisateur.</p>
+          <ul>
+            <li>Support matériel et logiciel</li>
+            <li>Gestion de tickets</li>
+            <li>Procédures et comptes rendus</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="competences">
+      <div class="section-title">
+        <div>
+          <span class="tag">Savoir-faire</span>
+          <h2>Compétences techniques</h2>
+        </div>
+        <p>
+          Mets ici les compétences que tu veux montrer au jury. Tu peux en ajouter, en enlever,
+          ou les organiser par domaine.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="skills">
+          <div class="skill">Windows Server</div>
+          <div class="skill">Active Directory</div>
+          <div class="skill">GPO</div>
+          <div class="skill">Cisco</div>
+          <div class="skill">VLAN</div>
+          <div class="skill">Routage</div>
+          <div class="skill">Virtualisation</div>
+          <div class="skill">GLPI</div>
+          <div class="skill">Support utilisateurs</div>
+          <div class="skill">Cybersécurité</div>
+          <div class="skill">Supervision</div>
+          <div class="skill">Documentation</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="parcours">
+      <div class="section-title">
+        <div>
+          <span class="tag">Évolution</span>
+          <h2>Parcours & expériences</h2>
+        </div>
+        <p>
+          Présente ici les grandes étapes de ton parcours scolaire et professionnel.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="timeline">
+          <div class="timeline-item">
+            <strong>2024 - 2026 • BTS SIO option SISR</strong>
+            <p>Formation en administration systèmes et réseaux, support, sécurité et gestion d'infrastructures.</p>
+          </div>
+          <div class="timeline-item">
+            <strong>Expérience en entreprise</strong>
+            <p>Ajoute ici ton alternance ou ton stage avec les missions réalisées, les outils utilisés et tes acquis.</p>
+          </div>
+          <div class="timeline-item">
+            <strong>Objectif professionnel</strong>
+            <p>Expliquer brièvement ton projet d'avenir : administration systèmes et réseaux, cybersécurité, support ou cloud.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <div>
+          <span class="tag">Documents</span>
+          <h2>Preuves et ressources</h2>
+        </div>
+        <p>
+          Tu peux intégrer ici tes captures d'écran, PDF, fiches missions, liens GitHub, comptes rendus ou annexes.
+        </p>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Captures d'écran</h3>
+          <p>Ajoute des visuels de configuration, tableaux de bord, topologies réseau ou interfaces d'administration.</p>
+        </div>
+        <div class="card">
+          <h3>Documents complémentaires</h3>
+          <p>Insère un lien vers ton dossier, tes annexes, ton GitHub, ou un PDF détaillant tes activités professionnelles.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-title">
+        <div>
+          <span class="tag">Contact</span>
+          <h2>Me contacter</h2>
+        </div>
+        <p>
+          Tu peux modifier cette partie avec ton adresse mail, LinkedIn, GitHub ou tout autre lien utile.
+        </p>
+      </div>
+
+      <div class="card contact-box">
+        <div>
+          <h3>Disponible pour échanger sur mon parcours et mes réalisations</h3>
+          <p>Mail : tonadresse@mail.com<br>LinkedIn : linkedin.com/in/tonprofil<br>GitHub : github.com/tonprofil</p>
+        </div>
+        <a href="mailto:tonadresse@mail.com" class="btn btn-primary">Envoyer un message</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Portfolio BTS SIO E5 • Design HTML/CSS style high-tech • Personnalisable selon tes projets
+    </div>
+  </footer>
+</body>
+</html>
